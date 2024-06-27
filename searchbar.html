@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="input1" oninput="search()">
+    <div id="output">
+
+
+    </div>
+
+    
+
+</body>
+
+</html>
+<script>
+
+    let database = [ {name:'shoe' , link:"https://www.jumia.com.ng/fashion-lauder-wm-black-and-white-shoes-173155660.html"} , {name:'bag' , link:"https://www.u-buy.com.ng/product/1C245E9MG-tote-bag-for-women-bags-for-women-teacher-work-15-6-laptop-bags-beach-handbag"}]
+
+    database.forEach((product, i) => {
+        output.innerHTML += `<button value="${product.link}" onclick="moveToLink(event)"> ${product.name} </button>`
+    })
+
+
+
+    function search() {
+        let inputValue = input1.value.toLowerCase().replaceAll(' ', '')
+        console.log(inputValue);
+
+        let filteredProducts = database.filter((product) => {
+            return product.name.includes(inputValue)
+        })
+
+        if (filteredProducts.length == 0) {
+            output.innerHTML = `product does not exist`
+
+        } else {
+            output.innerHTML = ''
+            filteredProducts.forEach((product, i) => {
+                output.innerHTML += `<button value="${product.link}" onclick="moveToLink(event)" > ${product.name} </button>`
+            })
+        }
+
+    }
+
+    function moveToLink(e) {
+     window.location.href = e.target.value
+    }
+
+
+
+
+
+</script>

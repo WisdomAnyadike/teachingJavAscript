@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <label for="mass"></label> <input id="mass" type="text">
+    <label for="volume"></label> <input id="volume" type="text">
+    
+    <button onclick="calculateDensity()">calculate</button>
+    <div id="div">
+
+    </div>
+</body>
+
+</html>
+<script>
+    // var myName = undefined
+    // function callStudent() {
+    //     console.log('hi victor');
+    // }
+    //hoisting
+    //iife
+    //argumrnts & parameters
+    //return
+    //arrow functions
+
+
+    // console.log(myName);
+
+
+    // var myName = 'david'
+
+    // callStudent()
+
+    // function callStudent() {
+    //     return 'hi victor'
+    // }
+
+    // // console.log(mySecondName);
+
+    // // let mySecondName = 'wisdom'
+
+
+    // function perimeterOfRectangle(length, width = 5) {
+
+    //     return 2 * (length + width)
+    // }
+
+
+    // console.log(perimeterOfRectangle(6, 34));
+    // console.log(perimeterOfRectangle(100, 27));
+
+    // let caluclate5modulus2 = (function calculate() {
+    //     return 5 % 2
+    // }())
+
+    // console.log(caluclate5modulus2);
+
+    // let ourfunction = function () {
+    //     console.log('hello');
+    // }
+
+    // ourfunction()
+
+
+    // function sumArgs() {
+
+    //     let sum = 0
+    //     for (let index = 0; index < arguments.length; index++) {
+    //         sum += arguments[index]
+    //     }
+
+    //     return sum
+
+    // }
+
+    // console.log(sumArgs(2, 4, 5, 6, 7, 8));
+    // console.log(sumArgs(2, 4, 5));
+
+    // let sumOfArgs = (...arg) => {
+    //     let sum = 0
+    //     for (let index = 0; index < arg.length; index++) {
+    //         sum += arg[index]
+    //     }
+
+    //     return sum
+    // }
+
+    // console.log(sumOfArgs(2, 4, 5, 6, 7, 8));
+    // console.log(sumOfArgs(2, 4, 5));
+
+
+    // function area(r) {
+    //     return Math.PI * (r ** 2)
+    // }
+    // console.log(area(2));
+
+    // function saysSmth() {
+    //     return function saysHiPlusSmth(smth) {
+    //         console.log(`hi ${smth}`);
+    //     }
+    // }
+
+    // saysSmth()('david')
+    // saysSmth()('wade')
+
+    // function muliplyby() {
+    //     return function muliply(params) {
+    //         return 2 * params
+    //     }
+    // }
+    // let muliplyby2 = muliplyby()
+
+    // muliplyby2(5)
+    // muliplyby2(7)
+
+  //1
+
+    function calculate(mass, volume) {
+        return mass / volume
+    }
+    function calculateDensity() {
+        div.innerHTML = calculate(mass.value, volume.value)
+    }
+
+
+    //2 
+
+    // function calculateDensity() {
+    //     div.innerHTML = Number(mass.value) / Number(volume.value)
+    // }
+
+</script>

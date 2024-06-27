@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #forInput2 {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="forInput"><input type="text" id="input"> <button onclick="addTodo()">add todo</button></div>
+    <div id="forInput2"> <input type="text" id="input2"> <button onclick="editTodo()">edit todo</button> </div>
+    <ul id="preview">
+
+
+    </ul>
+
+
+</body>
+
+</html>
+<script>
+    let database = []
+    let ourIndex
+
+    function addTodo() {
+
+        database.push(input.value)
+        input.value = ''
+        preview.innerHTML = ''
+        database.forEach((data, i) => {
+            preview.innerHTML = preview.innerHTML + `<li> ${data}  <button onclick="showEdit(${i})">edit </button> <button onclick="deleteTodo()"> del </button> </li> `
+        })
+
+
+
+    }
+
+    function showEdit(index) {
+        console.log(index);
+        ourIndex = index
+        input2.value = database[index]
+        forInput.style.display = 'none'
+        forInput2.style.display = 'block'
+        //    changer('none' , 'block')
+    }
+
+
+    // function changer(word1 , word2) {
+    //     forInput.style.display = word1
+    //     forInput2.style.display = word2
+    // }
+
+    function editTodo() {
+        database.splice(ourIndex, 1, input2.value)
+        input2.value = ''
+        preview.innerHTML = ''
+        database.forEach((data, i) => {
+            preview.innerHTML += `<li> ${data}  <button onclick="showEdit(${i})">edit </button> <button onclick="deleteTodo(${i})"> del </button> </li> `
+        })
+        forInput.style.display = 'block'
+        forInput2.style.display = 'none'
+
+
+        // changer('block' , 'none')
+
+    }
+
+
+    function deleteTodo(index) {
+
+        database.splice(index, 1)
+        preview.innerHTML = ''
+        database.forEach((data, i) => {
+            preview.innerHTML += `<li> ${data}  <button onclick="showEdit(${i})">edit </button> <button onclick="deleteTodo()"> del </button> </li> `
+        })
+
+
+    }
+
+
+</script>

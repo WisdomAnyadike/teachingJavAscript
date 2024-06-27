@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="number" id="weight">
+    <input type="number" id="height">
+    <button onclick="displayBmi()"> click </button>
+    <p id="bmi"> </p>
+</body>
+
+</html>
+<script>
+    function calBmi(w, h) {
+        return w / (h ** 2)
+    }
+
+
+
+    function displayBmi() {
+        let BMI = Math.round(calBmi(Number(weight.value), Number(height.value)))
+        console.log(BMI);
+        if (BMI < 18.5) {
+            bmi.innerText = 'underweight'
+        } else if (BMI >= 18.5 && BMI <= 24.9) {
+            bmi.innerText = 'normal weight'
+        } else if (BMI >= 25 && BMI <= 29.9) {
+            bmi.innerText = 'overweight'
+        } else {
+            bmi.innerText = 'obese'
+        }
+    }
+
+
+
+    let him
+
+    function callName() {
+        him = 'dave'
+
+    }
+
+    callName()
+
+    console.log(him);
+
+    const person = {
+        name: 'wisdom',
+        class: "javascript",
+        callName: function () {
+            console.log(`hi ${this.name}`);
+        }
+    }
+
+
+    person.name = 'tosman'
+
+
+    const mr = {
+        name: 'deola',
+        class: "javascript",
+        callName: function () {
+            console.log(`hi ${this.name}`);
+        }
+    }
+
+    mr.name = 'segun'
+
+
+
+    person.callName()
+    mr.callName()
+
+
+    console.log(Object.keys(person));
+    console.log(Object.values(person));
+    console.log(Object.entries(person));
+
+
+    console.log(person.hasOwnProperty('name'));
+
+
+
+    const users = {
+        Alex: {
+            email: 'alex@alex.com',
+            skills: ['HTML', 'CSS', 'JavaScript'],
+            age: 20,
+            isLoggedIn: false,
+            points: 30
+        },
+        Asab: {
+            email: 'asab@asab.com',
+            skills: ['HTML', 'CSS', 'JavaScript', 'Redux', 'MongoDB', 'Express', 'React', 'Node'],
+            age: 25,
+            isLoggedIn: false,
+            points: 50
+        },
+        Brook: {
+            email: 'daniel@daniel.com',
+            skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Redux'],
+            age: 30,
+            isLoggedIn: true,
+            points: 50
+        },
+        Daniel: {
+            email: 'daniel@alex.com',
+            skills: ['HTML', 'CSS', 'JavaScript', 'Python'],
+            age: 20,
+            isLoggedIn: false,
+            points: 40
+        },
+        John: {
+            email: 'john@john.com',
+            skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Redux', 'Node.js'],
+            age: 20,
+            isLoggedIn: true,
+            points: 50
+        },
+        Thomas: {
+            email: 'thomas@thomas.com',
+            skills: ['HTML', 'CSS', 'JavaScript', 'React'],
+            age: 20,
+            isLoggedIn: false,
+            points: 40
+        },
+        Paul: {
+            email: 'paul@paul.com',
+            skills: ['HTML', 'CSS', 'JavaScript', 'MongoDB', 'Express', 'React', 'Node'],
+            age: 20,
+            isLoggedIn: false,
+            points: 40
+        }
+    }
+
+    let num = 0
+    for (const key in users) {     
+        if (users[key].points >= 50) {
+           num++
+        }
+    }
+   
+    console.log(num)
+
+    if(num == 3){
+        num--
+        console.log(num);
+    }
+    
+
+
+
+
+// let arr = [ {name:'david'} , [] , [undefined , null] , {array: ['hey' , 'hi']}]
+
+// console.log(arr[3].array[1]);
+
+
+
+
+
+
+
+
+
+
+</script>
