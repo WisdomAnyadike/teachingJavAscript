@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div>
+        <select name="" id="provider">
+            <option value=""> choose provider </option>
+            <option value="mtn"> mtn </option>
+            <option value="glo"> glo </option>
+            <option value="9mobile"> 9mobile</option>
+            <option value="airtel"> airtel </option>
+        </select>
+
+        <select name="" id="amount">
+            <option value=""> choose amount </option>
+            <option value="100"> 100 </option>
+            <option value="200">200 </option>
+            <option value="500"> 500 </option>
+            <option value="1000"> 1000 </option>
+        </select>
+
+
+        <p> <button onclick="generate()"> generate pin </button> </p>
+        <h1> pin: <span id="ourPin"> </span> </h1>
+
+        <input type="text"> <button> load </button>
+
+
+
+    </div>
+
+</body>
+
+</html>
+<script>
+    function generate() {
+        let pin = ''
+        for (let index = 0; index < 10 ; index++) {
+            let random = Math.floor(Math.random() * 10)
+            pin += random
+        }
+        // let val = Math.floor(Math.random() * 10000000000)
+        // console.log(val.toString().length);
+
+        console.log(pin.length);
+        ourPin.innerText = pin
+
+    }
+</script>
