@@ -5,9 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        table,
+        th,
+        tbody,
+        thead , tr ,td{
+            border-collapse: collapse;
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
 </head>
 
 <body>
+
+    <h1 id="time"> </h1>
 
     <div>
         <select name="" id="provider">
@@ -30,27 +42,173 @@
         <p> <button onclick="generate()"> generate pin </button> </p>
         <h1> pin: <span id="ourPin"> </span> </h1>
 
-        <input type="text"> <button> load </button>
+        <input type="text" id="rechargeCard"> <button onclick="load()"> load </button>
+
+        <p> mtn : <span id="Mbal"></span> </p>
+
+        <p> glo : <span id="Gbal"></span> </p>
+        <p> airtel : <span id="Abal"></span> </p>
+        <p> 9mobile : <span id="Nbal"></span> </p>
+
+    </div>
+
+    <div>
+        <table>
+            <thead>
+                <th> provider </th>
+                <th> status</th>
+                <th>amount</th>
+                <th> pin </th>
+                <th>time created</th>
 
 
+            </thead>
+            <tbody id="tbody">
 
+
+            </tbody>
+
+
+        </table>
     </div>
 
 </body>
 
 </html>
 <script>
+    let Mbalance = 0
+    let Abalance = 0
+    let Nbalance = 0
+    let Gbalance =  localStorage.getItem('gloBalance') || 0
+    Gbal.innerText = Gbalance
+    let RechargeDatabase = JSON.parse(localStorage.getItem('database5')) ||  []
     function generate() {
-        let pin = ''
-        for (let index = 0; index < 10 ; index++) {
-            let random = Math.floor(Math.random() * 10)
-            pin += random
-        }
-        // let val = Math.floor(Math.random() * 10000000000)
-        // console.log(val.toString().length);
+        if (provider.value == '' || amount.value == '') {
+            alert('you didnot provide a provider or amount')
+        } else {
+            let pin = ''
+            for (let index = 0; index < 10; index++) {
+                let random = Math.floor(Math.random() * 10)
+                pin += random
+            }
+            console.log(pin.length);
+            ourPin.innerText = pin
 
-        console.log(pin.length);
-        ourPin.innerText = pin
+            let cardObj = {
+                provider: provider.value,
+                amount: amount.value,
+                used: false,
+                pin,
+                timeCreated: formatTime()
+            }
+
+            RechargeDatabase.push(cardObj)
+            localStorage.setItem('database5' , JSON.stringify(RechargeDatabase))
+            display()
+            console.log(RechargeDatabase);
+
+        }
+
+
 
     }
+
+    function display() {
+        tbody.innerHTML = ''
+        RechargeDatabase.forEach((card) => {
+            tbody.innerHTML += ` 
+             <tr> <td>${card.provider} </td> <td> ${card.used == true ? 'used' : 'not used'} </td> <td> ${card.amount} </td> <td> ${card.pin} </td> <td> ${card.timeCreated} </td>  </tr>`
+        })
+
+    }
+
+    display()
+
+    function load() {
+        let cardValue = rechargeCard.value
+        let cardNums = cardValue.slice(5, 15)
+        console.log(cardNums);
+
+        let foundPin = RechargeDatabase.find((rechargeCard) => {
+            return rechargeCard.pin === cardNums
+        })
+
+        if (!foundPin) {
+            alert('card does not exist')
+        } else if (foundPin.used == true) {
+            alert('card has already been used')
+        } else if (cardValue.startsWith('*311*') && cardValue.endsWith('#') && foundPin && cardValue.length == 16) {
+            alert(`you just loaded ${foundPin.provider} worth ${foundPin.amount}`)
+            foundPin.used = true
+            localStorage.setItem('database5', JSON.stringify(RechargeDatabase))
+            display()
+            addBal(foundPin.amount, foundPin.provider)
+        } else {
+            alert('invalid format')
+        }
+
+
+    }
+
+    function addBal(params, provider) {
+        if (provider === 'mtn') {
+            Mbalance += Number(params)
+            Mbal.innerText = Mbalance
+        } else if (provider === 'glo') {
+            Gbalance += Number(params)
+            localStorage.setItem('gloBalance' , Gbalance)
+            Gbal.innerText = Gbalance
+        } else if (provider === '9mobile') {
+            Nbalance += Number(params)
+            Nbal.innerText = Nbalance
+        } else {
+            Abalance += Number(params)
+            Abal.innerText = Abalance
+        }
+
+    }
+
+
+
+
+    function formatTime() {
+
+        let todaysDate = new Date()
+        console.log(todaysDate);
+        let hour = todaysDate.getHours()
+        let minutes = todaysDate.getMinutes()
+        let seconds = todaysDate.getSeconds()
+
+        if (hour < 10) {
+            hour = '0' + hour
+        }
+        if (minutes < 10) {
+            minutes = '0' + minutes
+        }
+        if (seconds < 10) {
+            seconds = '0' + seconds
+        }
+
+        if (hour < 12) {
+            return `${hour} : ${minutes} : ${seconds} am`
+        }
+        return `${hour} : ${minutes} : ${seconds} pm`
+
+    }
+
+    setInterval(() => {
+        time.innerText = formatTime()
+    }, 1000)
+
+
+
+    // localStorage.setItem('food' ,  "rice")
+    // localStorage.removeItem('food')
+    // let myFood = localStorage.getItem('food')
+    
+
+   
+    // console.log(myFood);
+    // localStorage.clear()
+
 </script>
