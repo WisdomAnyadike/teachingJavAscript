@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <img width="200" height="200" src="" alt="" id="image">
+    <input onchange="chooseFile(event)" type="file">
+
+    <button id="button1"> click </button>
+
+</body>
+
+</html>
+<script>
+    let arr = []
+    
+    function chooseFile(e) {
+        console.log(e.target);
+        let file = e.target.files[0]
+        if (file.size > 10000000000) {
+            console.log('too large');
+        } else {
+            console.log(file);
+            let reader = new FileReader()
+
+            if (file) {
+                reader.readAsDataURL(file)
+            }
+
+            reader.addEventListener('load', (e) => {
+                image.src = e.target.result
+
+            })
+
+
+
+
+
+
+        }
+
+
+    }
+
+    // let button = document.getElementById('button1')
+    // button.addEventListener('click' , (e)=> {
+    //     console.log(e.target);
+    //     alert('hiii!')
+    // })
+
+
+
+</script>
