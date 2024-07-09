@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    welcome <span id="username"> </span>
+
+    <button onclick="logout()"> logOut </button>
+</body>
+
+</html>
+<script>
+    let signUpDatabase = JSON.parse(localStorage.getItem('signUpDatabase'))
+    let signedInUserIndex = localStorage.getItem('signedInUserIndex')
+
+    if (signedInUserIndex === null) {
+        alert('youre not authorized')
+        window.location.href = 'login.html'
+    } else {
+        let user = signUpDatabase[signedInUserIndex]
+        username.innerText = user.name
+    }
+
+
+
+
+
+
+
+    function logout() {
+        localStorage.removeItem('signedInUserIndex')
+        alert('logout successful')
+        window.location.href = 'login.html'
+    }
+
+
+
+</script>

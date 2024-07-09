@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <label for="email"> email </label>
+        <input type="text" id="email">
+    </div>
+
+    <div>
+        <label for="password"> password </label>
+        <input type="text" id="password">
+    </div>
+
+    <button onclick="login()">login</button>
+
+
+</body>
+
+</html>
+<script>
+    let signUpDatabase = JSON.parse(localStorage.getItem('signUpDatabase'))
+
+
+    function login() {
+        if (email.value == '' || password.value == '') {
+            alert('all fields are mandatory')
+        } else if (signUpDatabase.find((data) => data.email === email.value && data.password !== password.value)) {
+            alert('incorrect email or password')
+        }
+        else if (signUpDatabase.find((data) => data.email === email.value && data.password === password.value)) {
+            let userIndex = signUpDatabase.findIndex((data) => data.email === email.value && data.password === password.value)
+            localStorage.setItem('signedInUserIndex', userIndex)
+            alert('login successful')
+            window.location.href = 'dashboard.html'
+        } else {
+            alert('you do not hav an account , sign up!')
+            window.location.href = 'signup.html'
+        }
+
+    }
+
+
+
+
+</script>

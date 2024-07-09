@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <label for="namee"> name </label>
+        <input type="text" id="namee">
+    </div>
+
+    <div>
+        <label for="email"> email </label>
+        <input type="text" id="email">
+    </div>
+
+    <div>
+        <label for="password"> password </label>
+        <input type="text" id="password">
+    </div>
+
+    <div>
+        <label for="confirmpassword"> confirm password </label>
+        <input type="text" id="confirmpassword">
+    </div>
+
+    <div>
+        <label for="checkbox"> agree to terms & conditions </label>
+        <input type="checkbox" id="checkbox">
+    </div>
+
+    <button onclick="signUp()"> sign up </button>
+
+</body>
+
+</html>
+<script>
+       function generateId() {
+        let randomId = ''
+        let values = ['a', 'b', 'c', 'd', 1, 2, 3, 4]
+
+        for (let index = 0; index < 6; index++) {
+            const picker = Math.floor(Math.random() * values.length)
+            
+            randomId += values[picker]
+
+        }
+
+        return randomId
+
+    }
+
+    let signUpDatabase = JSON.parse(localStorage.getItem('signUpDatabase')) || []
+    let emailregex = /^\w+[@][A-Za-z]+[.][a-zA-Z]+$/
+    let passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])(?=.*[#?$._!+])[A-Za-z0-9#?$._!+]{8,20}$/
+
+    function signUp(params) {
+        if (namee.value === '' || email.value === '' || password.value === '' || confirmpassword.value === '') {
+            alert('all fields are mandatory')
+        }
+        else if (!emailregex.test(email.value)) {
+            alert('email format is incorrect')
+        } else if (signUpDatabase.find((data) => data.email === email.value.trim())) {
+            alert("user already exists")
+        }
+
+        else if (!passwordRegex.test(password.value)) {
+            alert('password should be atleast 8 chars, with a special char, a number , a lowercase & uppercase letter')
+        } else if (confirmpassword.value !== password.value) {
+            alert('passwords do not match')
+        } else if (!checkbox.checked) {
+            alert('please agree to terms & conditions')
+        } else {
+            let userObj = {
+                id: generateId() ,
+                name: namee.value,
+                email: email.value,
+                password: password.value,
+                agreement: true
+            }
+
+            signUpDatabase.push(userObj)
+            localStorage.setItem('signUpDatabase', JSON.stringify(signUpDatabase))
+            window.location.href = 'login.html'
+            console.log(signUpDatabase);
+
+
+        }
+
+    }
+
+
+</script>
