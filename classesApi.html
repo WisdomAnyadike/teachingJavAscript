@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+    // function Student(name, cohort, course) {
+    //     this.name = name,
+    //         this.cohort = cohort,
+    //         this.course = course
+
+    //     this.learn = function () {
+    //         console.log(`i learnt ${this.course}`);
+    //     }
+
+    // }
+
+    // let Tosman = new Student('tos', 8, 'javascript')
+    // console.log(Tosman);
+    // Tosman.learn()
+
+    // let oyinda = new Student('oyinda', 10, 'react')
+    // oyinda.learn()
+
+
+    class Student {
+        constructor(name, cohort, course) {
+            this.name = name,
+                this.cohort = cohort,
+                this.course = course
+        }
+        learn() {
+            console.log(`i learnt ${this.course}`);
+        }
+
+    }
+
+    let tosman = new Student('tosin', 7, 'firebase')
+    tosman.learn()
+
+
+    class Pupils extends Student {
+        constructor(name, cohort, course, teacher) {
+            super(name, cohort, course)
+            this.teacher = teacher
+        }
+
+        learn() {
+            console.log(`i learnt ${this.course} from ${this.teacher}` );
+        }
+
+        GoForHolidays() {
+            console.log('i have travelled to dubai');
+        }
+    }
+
+    let esther = new Pupils('esther', 20, 'angular', 'aishat')
+    esther.learn()
+
+</script>
