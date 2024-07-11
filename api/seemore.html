@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container" style="height: 100vh;" class="d-flex align-items-center justify-content-around flex-wrap">
+
+
+
+    </div>
+</body>
+
+</html>
+<script>
+    let index = localStorage.getItem('productIndex')
+
+    if (index) {
+        const fetchSingleProduct = async () => {
+            try {
+                const res = await fetch(`https://dummyjson.com/products/${index}`)
+                const data = await res.json()
+                console.log(data);
+                container.innerHTML = ''
+                container.innerHTML = `
+          <div>  
+            <h1> ${data.title} </h1>
+            <p> ${data.brand} </p>
+            <p> ${data.rating} </p>
+            <p> ${data.stock} </p>
+            <p> ${data.description} </p>
+            <img src="${data.images[0]}" width="200" height="200" />
+
+
+
+            </div>
+
+         `
+            } catch (error) {
+                console.log(error);
+            }
+
+        }
+
+        fetchSingleProduct()
+    } else {
+        container.innerHTML = ''
+        container.innerHTML = `couldnt find product`
+    }
+
+
+
+
+
+
+</script>
