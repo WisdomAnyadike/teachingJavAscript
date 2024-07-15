@@ -39,13 +39,13 @@
 
 </html>
 <script>
-       function generateId() {
+    function generateId() {
         let randomId = ''
         let values = ['a', 'b', 'c', 'd', 1, 2, 3, 4]
 
         for (let index = 0; index < 6; index++) {
             const picker = Math.floor(Math.random() * values.length)
-            
+
             randomId += values[picker]
 
         }
@@ -76,11 +76,12 @@
             alert('please agree to terms & conditions')
         } else {
             let userObj = {
-                id: generateId() ,
+                id: generateId(),
                 name: namee.value,
                 email: email.value,
                 password: password.value,
-                agreement: true
+                agreement: true,
+             
             }
 
             signUpDatabase.push(userObj)

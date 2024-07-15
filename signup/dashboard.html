@@ -11,6 +11,29 @@
     welcome <span id="username"> </span>
 
     <button onclick="logout()"> logOut </button>
+
+
+    <div>
+        <label for="title"> title </label>
+        <input type="text" id="title">
+    </div>
+
+    <div>
+        <label for="description"> description </label>
+        <input type="text" id="description">
+    </div>
+
+    <div>
+        <label for="image"> image </label>
+        <input onchange="pickFile(event)" type="file" id="image">
+        <img width="40" height="40" id="myImage" alt="">
+    </div>
+
+    <button onclick="post()"> post blog</button>
+
+    <div id="preview">
+
+    </div>
 </body>
 
 </html>
@@ -28,8 +51,63 @@
 
 
 
+    function pickFile(e) {
+        let file = e.target.files[0]
+        console.log(file);
+        let reader = new FileReader()
+
+        if (file) {
+            reader.readAsDataURL(file)
+        }
+
+        reader.addEventListener('load', (e) => {
+            myImage.src = e.target.result
+        })
+
+    }
 
 
+
+
+    let postArr = JSON.parse(localStorage.getItem('signUpDatabase'))[signedInUserIndex].posts || []
+
+    function post() {
+        if (title.value == '' || description.value == '' || myImage.src === '') {
+            alert('all fields are mandatory')
+        } else {
+
+            let postObj = {
+                title: title.value,
+                description: description.value,
+                image: myImage.src
+            }
+
+            postArr.push(postObj)
+            signUpDatabase[signedInUserIndex].posts = postArr
+            localStorage.setItem('signUpDatabase', JSON.stringify(signUpDatabase))
+            display()
+            console.log(signUpDatabase);
+
+
+
+        }
+    }
+
+
+
+    function display() {
+        preview.innerHTML = ''
+        postArr.map((posts) => {
+            preview.innerHTML += `<div>
+                      <p> title : ${posts.title} </p>
+                      <p> description : ${posts.description} </p>
+                      <img width="40px" height="40px" src=${posts.image} />
+                    
+                    </div>`
+        })
+    }
+
+    display()
 
 
     function logout() {
@@ -38,6 +116,12 @@
         window.location.href = 'login.html'
     }
 
+    let school = {
+        schoolName : 'sqi'
+        , class: 'chill'
+    }
 
+    school.pages = '357'
+    console.log(school);
 
 </script>

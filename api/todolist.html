@@ -54,7 +54,12 @@
         fetch('http://localhost:3000/todos', {
             'method': 'POST',
             'Content-Type': 'application/json',
-            'body': JSON.stringify({ todo: todo.value, content: content.value })
+            'body': JSON.stringify({
+                todo: todo.value, content: content.value, user: [{
+                    name: 'wisdom',
+                    school: 'sqi'
+                }]
+            })
         }).then((response) => response.json()).then((data) => console.log('data sent successfully ' + data)).catch((error) => console.log(error))
     }
 
@@ -93,6 +98,10 @@
 
 
     function updateTodo() {
+        if (!theId || !theTodo || !theContent) {
+            alert('problem updating todo')
+            return
+        }
         fetch(`http://localhost:3000/todos/${theId}`, {
             'method': 'PUT',
             'Content-Type': 'application/json',
