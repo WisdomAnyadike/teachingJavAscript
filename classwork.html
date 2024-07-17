@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1> helooooooo </h1>
+    <button onclick="toggle()"> click </button>
+</body>
+
+</html>
+<script>
+    document.body.style.backgroundColor = 'white'
+    document.body.style.color = 'black'
+
+    function toggle() {
+        if (document.body.style.backgroundColor == 'white' && document.body.style.color == 'black') {
+            document.body.style.backgroundColor = 'black'
+            document.body.style.color = 'white'
+        } else {
+            document.body.style.backgroundColor = 'white'
+            document.body.style.color = 'black'
+        }
+
+    }
+
+    // #w2dr34
+    // rgb(255,255,255)
+
+    function generate(params) {
+        return (Math.random() * 24);
+    }
+
+    console.log(generate());
+
+    function generate() {
+        const one = Math.floor(Math.random() * 256)
+        const two = Math.floor(Math.random() * 256)
+        const three = Math.floor(Math.random() * 256)
+
+        return `rgb(${one},${two},${three})`
+    }
+
+    console.log(generate());
+
+    function generateHex() {
+        let arr = ['a', 'v', 'b', 'c', 1, 2, 3, 4]
+        let hex = '#'
+        for (let index = 0; index < 6; index++) {
+            let randomNum = Math.floor(Math.random() * arr.length)
+            hex = hex + arr[randomNum]
+
+        }
+        return hex
+    }
+
+
+
+    console.log(generateHex());
+
+    setInterval(() => {
+        document.body.style.backgroundColor = generate()
+    }, 3000);
+
+
+
+
+</script>
