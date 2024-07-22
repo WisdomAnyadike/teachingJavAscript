@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="div">
+
+    </div>
+
+    <button onclick="moveBackward()"> prev </button>
+    <button onclick="moveForward()"> next </button>
+
+
+
+</body>
+
+</html>
+<script>
+    let questions = [{
+        question: 'what is my name?',
+        options: ['wisdom', 'david', 'daniel'],
+        answer: 'wisdom'
+    }, {
+        question: 'what is me?',
+        options: ['wisdom', 'david', 'daniel'],
+        answer: 'david'
+    }]
+
+
+
+    let count = 0
+    let score = []
+    display()
+
+
+    function moveForward() {
+        if (count == (questions.length - 2)) {
+            count++
+            display(`<span> <button onclick="submit()"> submit </button> </span>`)
+        }
+        else if (count == (questions.length - 1)) {
+            let confirm = window.confirm('youve reached the end, submit?')
+            if (confirm) {
+                submit()
+            } else {
+                display(`<span> <button onclick="submit()"> submit </button> </span>`)
+            }
+
+        } else {
+            count++
+            display()
+        }
+
+
+    }
+
+    function moveBackward() {
+        if (count == 0) {
+            count = questions.length - 1
+            score.pop()
+            display(`<span> <button> submit </button> </span>`)
+
+        } else {
+            count--
+            score.pop()
+            display()
+        }
+
+
+
+
+    }
+
+
+
+    function display(params = '') {
+        div.innerHTML = `<p>${questions[count].question} </p>
+        <input onchange='check(event , ${count})' type="radio" id="option1" name="options" value="${questions[count].options[0]}">
+       <label for="option1"> ${questions[count].options[0]}</label><br>
+
+       <input onchange='check(event , ${count})'  type="radio" id="option2" name="options" value="${questions[count].options[1]}">
+        <label for="option2">${questions[count].options[1]}</label><br>
+
+        <input onchange='check(event , ${count})' type="radio" id="option3" name="options" value="${questions[count].options[2]}">
+         <label for="option3"> ${questions[count].options[2]}</label>
+
+<br>
+<br>
+           
+                         ${params}      `
+    }
+
+    function check(e, count) {
+        console.log(e?.target.value);
+        if (e.target.value === questions[count].answer) {
+            score.splice(count, 1, 1);
+
+        } else {
+            score.splice(count, 1, 0);
+
+        }
+        console.log(score);
+    }
+
+
+    console.log(score);
+
+    function submit() {
+        document.body.innerHTML = `<p> your score is ${score.reduce((a, b) => a + b, 0)}/${questions.length} </p>`
+    }
+
+</script>
